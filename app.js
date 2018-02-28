@@ -17,21 +17,24 @@ function callApi(searchTerm, pageToken, callback){
   $.getJSON(URL, query, callback)
 }
 
+function renderResult(result) {
+  return(`<div class='result'>
+    <a href='https://www.youtube.com/watch?v=${result.id.videoId}' target='_blank' class='thumbnail' role='link'>
+    <img src='${result.snippet.thumbnails.medium.url}' class='thumbs' alt='video thumbnail'></a>
+    <p class='caption'>${result.snippet.title}</p></div>`)
+}
+
+function displayResults(data) {
+  $('.js-search-results').html(data.items.map(renderResult)).append(pageNav(data));
+}
+
 function  watchSubmit() {
   $('form').submit((e) => {
     e.preventDefault();
     const queryTarget = $(e.currentTarget).find('.js-query');
     const query = queryTarget.val();
+    queryTarget.val('');
     callApi(query, undefined, displayResults);
-  });
-}
-
-function watchPageToken() {
-  $('.js-search-results').on('click', '#nextPage', (e) => {
-    callApi(searchedTerm, nextPage, displayResults)
-  });
-  $('.js-search-results').on('click', '#prevPage', (e) => {
-    callApi(searchedTerm, prevPage, displayResults)
   });
 }
 
@@ -49,15 +52,14 @@ function pageNav(data){
     return openTag + closeTag
   }
 
-function renderResult(result) {
-  return(`<div class='result'>
-    <a href='https://www.youtube.com/watch?v=${result.id.videoId}' target='_blank' class= 'thumbnail' role='link'>
-    <img src='${result.snippet.thumbnails.medium.url}' alt='video thumbnail'></a>
-    <p class='caption'>${result.snippet.title}</p></div>`)
+function watchPageToken() {
+  $('.js-search-results').on('click', '#nextPage', (e) => {
+    callApi(searchedTerm, nextPage, displayResults)
+  });
+  $('.js-search-results').on('click', '#prevPage', (e) => {
+    callApi(searchedTerm, prevPage, displayResults)
+  });
 }
 
-function displayResults(data) {
-  $('.js-search-results').html(data.items.map(renderResult)).append(pageNav(data));
-}
 $(watchSubmit);
 $(watchPageToken);
