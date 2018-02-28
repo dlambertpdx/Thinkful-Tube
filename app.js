@@ -1,6 +1,8 @@
 const API_KEY = 'AIzaSyCBxwI_1JYyOQ0a5pi8ETEoYo1GXHOFVBM';
 const URL = 'https://www.googleapis.com/youtube/v3/search';
-
+var nextPage;
+var prevPage;
+var searchedTerm;
 
 function callApi(searchTerm, pageToken, callback){
   const query = {
@@ -11,7 +13,7 @@ function callApi(searchTerm, pageToken, callback){
     key: API_KEY,
     pageToken: pageToken
   };
-
+  searchedTerm = searchTerm;
   $.getJSON(URL, query, callback)
 }
 
@@ -26,25 +28,25 @@ function  watchSubmit() {
 
 function watchPageToken() {
   $('.js-search-results').on('click', '#nextPage', (e) => {
-    callApi(searchTerm, nextPage, displayResults)
+    callApi(searchedTerm, nextPage, displayResults)
   });
   $('.js-search-results').on('click', '#prevPage', (e) => {
-    callApi(searchTerm, prevPage, displayResults)
+    callApi(searchedTerm, prevPage, displayResults)
   });
 }
 
-function renderPageNav(data){
+function pageNav(data){
   nextPage = data.nextPageToken;
   prevPage = data.prevPageToken;
-  let startTag = `<div class='pageNav'><form><fieldset>`
-  let endTag = `</fieldset></form></div>`
+  let openTag = `<div class='pageNav'><form><fieldset>`
+  let closeTag = `</fieldset></form></div>`
   if (prevPage) {
-      startTag += `<button type='button' id='prevPage' value='Prev'>Prev</button>`
+      openTag += `<button type='button' id='prevPage' value='Prev'>Prev</button>`
     }
     if (nextPage) {
-      startTag += `<button type='button' id='nextPage' value='Next'>Next</button>`
+      openTag += `<button type='button' id='nextPage' value='Next'>Next</button>`
     }
-    return startTag + endTag
+    return openTag + closeTag
   }
 
 function renderResult(result) {
@@ -55,8 +57,7 @@ function renderResult(result) {
 }
 
 function displayResults(data) {
-  $('.js-search-results').html(data.items.map(renderResult)).append(renderPageNav(data));
-  console.log(data)
+  $('.js-search-results').html(data.items.map(renderResult)).append(pageNav(data));
 }
 $(watchSubmit);
 $(watchPageToken);
