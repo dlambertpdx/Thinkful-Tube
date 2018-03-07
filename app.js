@@ -15,7 +15,7 @@ function callApi(searchTerm, pageToken, callback){
     key: API_KEY,
     pageToken: pageToken
   };
-  let searchedTerm = searchTerm;
+  searchedTerm = searchTerm;
   $.getJSON(URL, query, callback)
 }
 
