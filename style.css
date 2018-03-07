@@ -7,43 +7,101 @@ body {
   background: #606c88;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #3f4c6b, #606c88); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;
+  color: #e6e6e9;
+  padding: 10px;
 }
- main {
-   display: block;
-   position: relative;
- }
+
+header {
+  display: block;
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+main {
+  display: block;
+  position: relative;
+  min-width: 300px;
+  max-width: 960px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+@media screen
+  and (max-width: 480px) {
+  main {
+    margin-top: 5px;
+  }
+}
+
+input.js-query {
+  border: 1px solid #636363;
+  border-radius: 3px 0 0 3px;
+  padding-left: 10px;
+  min-width: 200px;
+  width: 60%;
+  height: 30px;
+  font-size: 16px;
+  vertical-align: bottom;
+  margin-bottom: 10px;
+}
+
+input.js-query::-webkit-input-placeholder {
+  color: #636363;
+}
+
+button#submit {
+  postion: relative;
+  border: 1px solid #598381;
+  border-radius: 0 3px 3px 0;
+  padding: 0;
+  height: 30px;
+  width: 45px;
+  color: #fff;
+  background: #598381;
+  margin-bottom: 10px;
+  margin-left: -5px;
+}
 
 fieldset {
   border: none;
 }
 
-
 .js-search-results {
-  disple: hidden;
+  visibility: hidden;
+  display: flex;
+  margin: 15px auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 1024px;
+  box-shadow: 0px 1px 2px 0px #636363;
+  border-radius: 5px;
+  padding-top: 10px;
+  background-color: #e6e6e9;
 }
 
+img {
+  width: 300px;
+  max-height: 180px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
+.caption {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+  color: #598381;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- @media screen
-   and (max-width: 480px) {
-   main {
-     margin-top: 5px;
-   }
- }
+.result {
+  align-items: center;
+  margin: 10px;
+  max-width: 300px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px 0px #636363;
+  background-color: #fff;
+}

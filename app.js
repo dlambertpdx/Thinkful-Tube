@@ -8,7 +8,7 @@ function callApi(searchTerm, pageToken, callback){
   const query = {
     type: 'video',
     q: searchTerm,
-    maxResults: 3,
+    maxResults: 6,
     part: 'snippet',
     key: API_KEY,
     pageToken: pageToken
@@ -35,13 +35,14 @@ function  watchSubmit() {
     const query = queryTarget.val();
     queryTarget.val('');
     callApi(query, undefined, displayResults);
+    $('.js-search-results').css('visibility', 'visible');
   });
 }
 
 function pageNav(data){
   nextPage = data.nextPageToken;
   prevPage = data.prevPageToken;
-  let openTag = `<div class='pageNav'><form><fieldset>`
+  let openTag = `<div id='pageNav'><form><fieldset>`
   let closeTag = `</fieldset></form></div>`
   if (prevPage) {
       openTag += `<button type='button' id='prevPage' value='Prev'>Prev</button>`
