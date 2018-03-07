@@ -4,9 +4,9 @@
 
 body {
   font-family: 'Abel', sans-serif;
-  background: #606c88;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3f4c6b, #606c88); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url("https://images.unsplash.com/6/blurred_lines.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
   color: #e6e6e9;
   padding: 10px;
 }
@@ -50,8 +50,31 @@ input.js-query::-webkit-input-placeholder {
   color: #636363;
 }
 
+.navButton {
+  position: relative;
+  padding: 0 3px 3px 0;
+  height: 30px;
+  width: 50px;
+  color: white;
+  font-weight: bold;
+  align-content: center;
+  background-color: #598381;
+  border: 1px solid #598381;
+  cursor: pointer;
+}
+
+#prevPage {
+  position: relative;
+  margin: 3px;
+}
+
+#nextPage {
+  position: relative;
+  margin: 3px;
+}
+
 button#submit {
-  postion: relative;
+  position: relative;
   border: 1px solid #598381;
   border-radius: 0 3px 3px 0;
   padding: 0;
@@ -78,11 +101,11 @@ fieldset {
   box-shadow: 0px 1px 2px 0px #636363;
   border-radius: 5px;
   padding-top: 10px;
-  background-color: #e6e6e9;
+  background-color: rgba(230, 230, 233, 0.50);
 }
 
 img {
-  width: 300px;
+  max-width: 300px;
   max-height: 180px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

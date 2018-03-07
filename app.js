@@ -1,9 +1,11 @@
 const API_KEY = 'AIzaSyCBxwI_1JYyOQ0a5pi8ETEoYo1GXHOFVBM';
 const URL = 'https://www.googleapis.com/youtube/v3/search';
-var nextPage;
-var prevPage;
-var searchedTerm;
+let nextPage;
+let prevPage;
+let searchedTerm;
 
+
+//get data from API
 function callApi(searchTerm, pageToken, callback){
   const query = {
     type: 'video',
@@ -13,15 +15,16 @@ function callApi(searchTerm, pageToken, callback){
     key: API_KEY,
     pageToken: pageToken
   };
-  searchedTerm = searchTerm;
+  let searchedTerm = searchTerm;
   $.getJSON(URL, query, callback)
 }
 
+// display results in result div
 function renderResult(result) {
-  return(`<div class='result'>
+  return`<div class='result'>
     <a href='https://www.youtube.com/watch?v=${result.id.videoId}' target='_blank' class='thumbnail' role='link'>
     <img src='${result.snippet.thumbnails.medium.url}' class='thumbs' alt='video thumbnail'></a>
-    <p class='caption'>${result.snippet.title}</p></div>`)
+    <p class='caption'>${result.snippet.title}</p></div>`
 }
 
 function displayResults(data) {
@@ -39,20 +42,6 @@ function  watchSubmit() {
   });
 }
 
-function pageNav(data){
-  nextPage = data.nextPageToken;
-  prevPage = data.prevPageToken;
-  let openTag = `<div id='pageNav'><form><fieldset>`
-  let closeTag = `</fieldset></form></div>`
-  if (prevPage) {
-      openTag += `<button type='button' id='prevPage' value='Prev'>Prev</button>`
-    }
-    if (nextPage) {
-      openTag += `<button type='button' id='nextPage' value='Next'>Next</button>`
-    }
-    return openTag + closeTag
-  }
-
 function watchPageToken() {
   $('.js-search-results').on('click', '#nextPage', (e) => {
     callApi(searchedTerm, nextPage, displayResults)
@@ -60,6 +49,21 @@ function watchPageToken() {
   $('.js-search-results').on('click', '#prevPage', (e) => {
     callApi(searchedTerm, prevPage, displayResults)
   });
+}
+
+//display page navigation
+function pageNav(data) {
+  nextPage = data.nextPageToken;
+  prevPage = data.prevPageToken;
+  let openTag = `<div id='pageNav'><form><fieldset>`
+  let closeTag = `</fieldset></form></div>`
+  if (prevPage) {
+    openTag += `<button type='button' class='navButton' id='prevPage' value='Prev'><i class="fas fa-angle-left fa-lg"></i></button>`
+  }
+  if (nextPage) {
+    openTag += `<button type='button' class='navButton' id='nextPage' value='Next'><i class="fas fa-angle-right fa-lg"></i></button>`
+  }
+  return openTag + closeTag
 }
 
 $(watchSubmit);
