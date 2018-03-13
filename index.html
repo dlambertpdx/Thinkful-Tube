@@ -13,14 +13,14 @@
       <h1>Thinkful Tube API Project</h1>
     </header>
 
-    <main role='mail' id='main'>
+    <main role='main' id='main' aria-live="assertive" hidden>
       <form role='form'>
         <fieldset>
           <div align='center' role='search'>
             <legend></legend>
-            <label for="query"></label>
-            <input type="text" name="query" class='js-query' placeholder="Let's search...">
-            <button type="submit" id='submit'><i class="fas fa-search fa-lg"></i></button>
+            <label for="query" aria-label='Search'>Search YouTube: </label>
+            <input aria-label='Search' type="text" name="query" class='js-query' id='query' placeholder="Let's search...">
+            <button aria-label='Search-Button' type="submit" id='submit'><i class="fas fa-search fa-lg"></i></button>
           </div>
         </fieldset>
       </form>

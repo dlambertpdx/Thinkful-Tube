@@ -28,7 +28,7 @@ function renderResult(result) {
 }
 
 function displayResults(data) {
-  $('.js-search-results').html(data.items.map(renderResult)).append(pageNav(data));
+  $('.js-search-results').prop('hidden', false).html(data.items.map(renderResult)).append(pageNav(data));
 }
 
 function  watchSubmit() {
@@ -58,10 +58,10 @@ function pageNav(data) {
   let openTag = `<div id='pageNav'><form><fieldset>`
   let closeTag = `</fieldset></form></div>`
   if (prevPage) {
-    openTag += `<button type='button' class='navButton' id='prevPage' value='Prev'><i class="fas fa-angle-left fa-lg"></i></button>`
+    openTag += `<button type='button' class='navButton' id='prevPage' value='Prev'><i class="fas fa-angle-left fa-lg"></i> Prev</button>`
   }
   if (nextPage) {
-    openTag += `<button type='button' class='navButton' id='nextPage' value='Next'><i class="fas fa-angle-right fa-lg"></i></button>`
+    openTag += `<button type='button' class='navButton' id='nextPage' value='Next'>Next <i class="fas fa-angle-right fa-lg"></i></button>`
   }
   return openTag + closeTag
 }
